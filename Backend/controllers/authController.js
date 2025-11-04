@@ -29,20 +29,30 @@ transporter.verify((error, success) => {
 //Register
 export const signup = async (req, res) => {
     try{
+        console.log('Signup request received:', req.body);
         const {name, email, password} = req.body;
 
+        if (!name || !email || !password) {
+            return res.status(400).json({message: "All fields are required"});
+        }
+
+        console.log('Checking for existing user...');
         const existing = await User.findOne({email});
 
         if(existing){
             return res.status(400).json({message: "Email already exists"});
         }
 
+        console.log('Hashing password...');
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        console.log('Generated OTP:', otp);
 
+        console.log('Creating new user...');
         const user = new User({name, email, password: hashedPassword, otp});
         await user.save();
+        console.log('User saved successfully');
 
         const mailOptions = {
             from: process.env.EMAIL_USER,
@@ -72,10 +82,12 @@ export const signup = async (req, res) => {
             console.log('Check your email configuration or use the OTP above');
         }
 
+        console.log('Sending success response...');
         res.json({message: "User registered successfully. Please check your email for OTP."});
 
     } catch (error) {
         console.error('Signup error:', error);
+        console.error('Error stack:', error.stack);
         res.status(500).json({message: error.message || "Registration failed"});
     }
 };

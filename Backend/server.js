@@ -5,6 +5,22 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import dotenv from "dotenv";
 dotenv.config();
+
+// Validate environment variables
+if (!process.env.MONGO_URL) {
+    console.error('❌ MONGO_URL environment variable is not set');
+}
+if (!process.env.JWT_SECRET) {
+    console.error('❌ JWT_SECRET environment variable is not set');
+}
+
+console.log('Environment check:', {
+    MONGO_URL: process.env.MONGO_URL ? 'Set' : 'Missing',
+    JWT_SECRET: process.env.JWT_SECRET ? 'Set' : 'Missing',
+    EMAIL_USER: process.env.EMAIL_USER ? 'Set' : 'Missing',
+    EMAIL_PASS: process.env.EMAIL_PASS ? 'Set' : 'Missing'
+});
+
 //connect
 connectDB();
 

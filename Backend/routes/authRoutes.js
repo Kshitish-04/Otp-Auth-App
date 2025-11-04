@@ -4,6 +4,11 @@ import { authenticateToken } from '../middleware/auth.js';
 
 const rout = express.Router();
 
+// Test endpoint
+rout.get('/test', (req, res) => {
+    res.json({ message: 'Auth API is working!', timestamp: new Date().toISOString() });
+});
+
 rout.post('/signup', signup);
 rout.post('/verify-otp', verifyOtp);
 rout.post('/resend-otp', resendOtp);
