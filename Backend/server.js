@@ -13,7 +13,7 @@ app.use(express.json())
 // app.use(cors())
 app.use(cors({
     origin: [
-        'https://production-otp-auth-app.vercel.app',  // Add your actual Vercel URL
+        'https://authentication-app-sage.vercel.app',  // Frontend Vercel URL
         'http://localhost:5173',              // For local development
         'http://localhost:3000'               // Alternative local port
     ],
