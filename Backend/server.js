@@ -29,7 +29,7 @@ app.use(express.json())
 // app.use(cors())
 app.use(cors({
     origin: [
-        'https://authentication-app-sage.vercel.app',  // Frontend Vercel URL
+        'https://production-otp-auth-app-frontend.vercel.app',  // Frontend Vercel URL
         'http://localhost:5173',              // For local development
         'http://localhost:3000'               // Alternative local port
     ],

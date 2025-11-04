@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     const wakeUpBackend = async () => {
       try {
-        await fetch('https://authentication-app-sage.vercel.app/');
+        await fetch('https://otp-auth-app-phi.vercel.app/');
         console.log('✅ Backend wake-up successful');
       } catch (error) {
         console.log('🚀 Backend wake-up request sent');
