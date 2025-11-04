@@ -5,7 +5,6 @@ import nodemailer from "nodemailer"
 import dotenv from "dotenv"
 dotenv.config();
 
-//
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -15,6 +14,7 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS
     }
 });
+//done
 
 // Test email configuration on startup
 transporter.verify((error, success) => {
