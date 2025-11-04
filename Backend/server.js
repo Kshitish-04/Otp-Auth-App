@@ -28,11 +28,19 @@ const app = express();
 app.use(express.json())
 // app.use(cors())
 app.use(cors({
-    origin: [
-        'https://production-otp-auth-app-frontend.vercel.app',  // Frontend Vercel URL
-        'http://localhost:5173',              // For local development
-        'http://localhost:3000'               // Alternative local port
-    ],
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, etc.)
+        if (!origin) return callback(null, true);
+        
+        // Allow all Vercel deployments and localhost
+        if (origin.includes('.vercel.app') || 
+            origin.includes('localhost') ||
+            origin.includes('127.0.0.1')) {
+            return callback(null, true);
+        }
+        
+        callback(new Error('Not allowed by CORS'));
+    },
     credentials: true
 }));
 app.get("/", (req, res) => {
