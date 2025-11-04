@@ -22,11 +22,15 @@ const Signup = () => {
         e.preventDefault();
         setLoading(true);
         try{
+            console.log('Attempting signup with:', form);
             const response = await API.post('/signup',form);
+            console.log('Signup response:', response.data);
             alert(response.data.message);
             navigate('/verify-otp',{state:{email:form.email}})
         }catch(err){
-            alert(err.response?.data?.message || "Signup failed");
+            console.error('Signup error:', err);
+            console.error('Error response:', err.response);
+            alert(err.response?.data?.message || err.message || "Signup failed");
         } finally {
             setLoading(false);
         }
