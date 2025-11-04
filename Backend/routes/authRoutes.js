@@ -6,7 +6,15 @@ const rout = express.Router();
 
 // Test endpoint
 rout.get('/test', (req, res) => {
-    res.json({ message: 'Auth API is working!', timestamp: new Date().toISOString() });
+    res.json({ 
+        message: 'Auth API is working!', 
+        timestamp: new Date().toISOString(),
+        env: {
+            MONGO_URL: process.env.MONGO_URL ? 'Set' : 'Missing',
+            JWT_SECRET: process.env.JWT_SECRET ? 'Set' : 'Missing',
+            EMAIL_USER: process.env.EMAIL_USER ? 'Set' : 'Missing'
+        }
+    });
 });
 
 rout.post('/signup', signup);
